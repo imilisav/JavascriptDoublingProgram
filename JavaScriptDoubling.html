@@ -1,0 +1,70 @@
+<html>
+
+  <head>
+    <title>JavascriptDoubling</title>
+  </head>
+
+  <body onload="loadPrompt()">
+    <h2>Tim Horton Sequence</h2>
+
+    <hr/>
+    <p>The Tim Horton Sequence a series of numbers where each value is twice of the preceeding number.<br>This will be now known as the 'Double Double'.<br>They will show the power of doubling:</p>
+    <p>This will show each step starting at the value of <b>ONE (1) times Two (2).</b></p>
+    <hr/>
+
+    <!--Javascript Code-->
+    <script>
+      function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+
+      function loadPrompt() {
+        var limit = prompt("Please enter the upper limit \n \n Do NOT exceed 30", "0");
+
+        if (limit == null || limit <= 0 || limit > 30)
+        {
+          document.getElementById("output_title").innerHTML = "User enter an invalid (out of range) value";
+        }
+        else
+        {
+          document.getElementById("output_title").innerHTML = "<b>Sequence of numbers up to iteration number: </b>" + limit + "<br>";
+          var number = 1;
+          for (iteration = 1; iteration <= limit; iteration++)
+          {
+            var div = document.getElementById("output");
+            if (iteration < 10)
+            {
+              var newContent = document.createElement('p');
+              newContent.innerHTML = "<p><b>STEP " + iteration + ":</b>" + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + number + " * 2 = " + (number * 2) + "</p>";
+
+              if (newContent.firstChild) {
+                div.appendChild(newContent.firstChild);
+              }
+
+              number *= 2;
+            }
+            else
+            {
+              var newContentPast10 = document.createElement('p');
+              newContentPast10.innerHTML = "<p><b>STEP " + iteration + ":</b>" + '&nbsp;&nbsp;&nbsp;&nbsp;' + formatNumber(number) + " * 2 = " + formatNumber(number * 2) + "</p>";
+
+              if (newContentPast10.firstChild) {
+                div.appendChild(newContentPast10.firstChild);
+              }
+
+              number *= 2;
+            }
+          }
+        }
+      }
+    </script>
+
+    <p id="output_title"></p>
+    <div id="output"></div>
+
+    <hr/>
+    <h4>This is the end of the results.</h4>
+    <p>Author: Ilija Milisav</p>
+  </body>
+
+</html>
